@@ -26,6 +26,20 @@ git_override(
     commit = <commit>,
     remote = "https://github.com/ticketmaster/rules_opa",
 )
+
+# Optional: Configure OPA version (defaults to 1.1.0)
+opa = use_extension("@rules_opa//opa:extensions.bzl", "opa")
+opa.version(version = "1.7.1")  # Specify desired version
+use_repo(
+    opa,
+    "opa_builtin_metadata_json",
+    "opa_capabilities_json",
+    "opa_darwin_amd64",
+    "opa_darwin_arm64_static",
+    "opa_linux_amd64_static",
+    "opa_linux_arm64_static",
+    "opa_windows_amd64",
+)
 ```
 
 Legacy workspace
@@ -42,7 +56,8 @@ http_archive(
 
 load("@rules_opa//opa:deps.bzl", "opa_register_toolchains", "opa_rules_dependencies")
 
-opa_rules_dependencies()
+# Defaults to version 1.1.0, or specify a different version:
+opa_rules_dependencies(version = "1.7.1")
 
 opa_register_toolchains()
 ```

@@ -17,6 +17,8 @@ register_toolchains(
 )
 
 internal_deps = use_extension("//opa/private:extensions.bzl", "internal_deps")
+# To use a different OPA version, uncomment and set desired version:
+# internal_deps.version(version = "1.7.1")
 use_repo(
     internal_deps,
     "opa_darwin_amd64",
